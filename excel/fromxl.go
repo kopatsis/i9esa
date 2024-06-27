@@ -266,11 +266,14 @@ func EnterEx() []datatypes.Exercise {
 	return end
 }
 
-func EnterSt() []datatypes.Stretch {
+func EnterSt() ([]datatypes.Stretch, map[string][]string) {
+
+	nameMap := map[string][]string{}
+
 	f, err := excelize.OpenFile("assets/i9sa.xlsx")
 	if err != nil {
 		fmt.Println(err)
-		return nil
+		return nil, nil
 	}
 
 	defer func() {
@@ -341,17 +344,47 @@ func EnterSt() []datatypes.Stretch {
 			}
 			inpairs := doubles != ""
 
+			weightSt, err := f.GetCellValue("Main", "G"+strconv.Itoa(row))
+			if err != nil {
+				fmt.Println(err)
+				row++
+				continue
+			}
+
+			if weightSt == "" {
+				weightSt = "0"
+			}
+
+			weight, err := strconv.ParseFloat(weightSt, 32)
+			if err != nil {
+				fmt.Println(err)
+				row++
+				continue
+			}
+
+			nameListSt, err := f.GetCellValue("Main", "F"+strconv.Itoa(row))
+			if err != nil {
+				fmt.Println(err)
+				row++
+				continue
+			}
+
+			if nameListSt != "" {
+				nameMap[name] = strings.Split(strings.ReplaceAll(nameListSt, ", ", ","), ",")
+			}
+
 			current := datatypes.Stretch{
 				Name:      name,
 				Status:    status,
 				MinLevel:  float32(minlevel),
 				BodyParts: bodyparts,
 				InPairs:   inpairs,
+				Weight:    float32(weight),
 			}
 			end = append(end, current)
 		}
 		row++
 	}
 
-	return end
+	return end, nameMap
 }

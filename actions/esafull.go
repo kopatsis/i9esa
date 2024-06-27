@@ -36,13 +36,17 @@ func RunESA(database *mongo.Database) string {
 	}
 
 	if entry == "S" || entry == "B" {
-		allSts := excel.EnterSt()
+		allSts, nameMap := excel.EnterSt()
 
 		collection := database.Collection("stretch")
 
 		currentStretches := views.GetStretchesDB(database)
 
 		insertStretchResults := mongodb.SaveStretch(collection, allSts, currentStretches)
+
+		if err := mongodb.SaveStretchPairs(collection, insertStretchResults, nameMap); err != nil {
+			fmt.Println("URGENT: ERROR -- " + err.Error())
+		}
 
 		excel.AddStrToXL(insertStretchResults)
 	}

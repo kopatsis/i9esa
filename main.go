@@ -41,7 +41,7 @@ func main() {
 			if result == "M" {
 				views.PrintMatrix(database)
 			} else if result == "S" {
-				views.PrintAllStretches(database)
+				// views.PrintAllStretches(database)
 			} else if result == "E" {
 				views.PrintAllExers(database)
 			} else if result == "B" {
