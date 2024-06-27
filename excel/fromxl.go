@@ -241,6 +241,23 @@ func EnterEx() []datatypes.Exercise {
 			}
 			generalType := strings.Split(strings.ReplaceAll(generalTypeStr, " ", ""), ",")
 
+			singleGrSt, err := f.GetCellValue("Main", "S"+strconv.Itoa(row))
+			if err != nil {
+				fmt.Println(err)
+				row++
+				continue
+			}
+			if singleGrSt == "" {
+				singleGrSt = "0"
+			}
+
+			singleGr, err := strconv.Atoi(singleGrSt)
+			if err != nil {
+				fmt.Println(err)
+				row++
+				continue
+			}
+
 			current := datatypes.Exercise{
 				Name:         name,
 				Parent:       parent,
@@ -257,6 +274,7 @@ func EnterEx() []datatypes.Exercise {
 				CardioRating: float32(cardioRating),
 				PushupType:   pushupType,
 				GeneralType:  generalType,
+				SinglesGroup: singleGr,
 			}
 			end = append(end, current)
 		}
