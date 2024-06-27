@@ -46,7 +46,7 @@ func AddMatrixToDBFull(database *mongo.Database) {
 	var oldmatrix datatypes.TypeMatrix
 	finderr := collection.FindOne(context.Background(), filter).Decode(&oldmatrix)
 	if finderr != nil && finderr != mongo.ErrNoDocuments {
-		fmt.Printf("Error getting matrix from DB: %s\n", err.Error())
+		fmt.Printf("Error getting matrix from DB: %s\n", finderr.Error())
 		return
 	}
 
