@@ -391,7 +391,7 @@ func EnterSt() ([]datatypes.Stretch, map[string][]string) {
 				nameMap[name] = strings.Split(strings.ReplaceAll(nameListSt, ", ", ","), ",")
 			}
 
-			reqGroupSt, err := f.GetCellValue("Main", "G"+strconv.Itoa(row))
+			reqGroupSt, err := f.GetCellValue("Main", "H"+strconv.Itoa(row))
 			if err != nil {
 				fmt.Println(err)
 				row++
