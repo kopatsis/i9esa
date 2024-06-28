@@ -33,7 +33,7 @@ type Stretch struct {
 	InPairs      bool               `bson:"inpairs"`
 	DynamicPairs []string           `bson:"dynamicpairs"`
 	Weight       float32            `bson:"weight"`
-	ReqGroup     float32            `bson:"reqgroup"`
+	ReqGroup     int                `bson:"reqgroup"`
 }
 
 type TypeMatrix struct {
