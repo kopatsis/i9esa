@@ -258,6 +258,23 @@ func EnterEx() []datatypes.Exercise {
 				continue
 			}
 
+			introGrSt, err := f.GetCellValue("Main", "T"+strconv.Itoa(row))
+			if err != nil {
+				fmt.Println(err)
+				row++
+				continue
+			}
+			if introGrSt == "" {
+				introGrSt = "0"
+			}
+
+			introGr, err := strconv.Atoi(introGrSt)
+			if err != nil {
+				fmt.Println(err)
+				row++
+				continue
+			}
+
 			current := datatypes.Exercise{
 				Name:         name,
 				Parent:       parent,
@@ -275,6 +292,7 @@ func EnterEx() []datatypes.Exercise {
 				PushupType:   pushupType,
 				GeneralType:  generalType,
 				SinglesGroup: singleGr,
+				IntroGroup:   introGr,
 			}
 			end = append(end, current)
 		}

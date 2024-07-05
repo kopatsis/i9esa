@@ -22,6 +22,7 @@ type Exercise struct {
 	PushupType   string             `bson:"pushuptype"`
 	GeneralType  []string           `bson:"generaltype"`
 	SinglesGroup int                `bson:"singlesgroup"`
+	IntroGroup   int                `bson:"introgroup"`
 }
 
 type Stretch struct {
