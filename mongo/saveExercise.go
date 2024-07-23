@@ -32,6 +32,7 @@ func SaveExercise(collection *mongo.Collection, exercises []datatypes.Exercise, 
 		if existingID != primitive.NilObjectID {
 			filter := bson.M{"_id": existingID}
 			update := bson.M{"$set": exer}
+			fmt.Println(exer.Name, exer.StartQuality)
 			updateOptions := options.Update().SetUpsert(true)
 
 			_, err := collection.UpdateOne(context.TODO(), filter, update, updateOptions)

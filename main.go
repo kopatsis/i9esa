@@ -43,7 +43,7 @@ func main() {
 			} else if result == "S" {
 				// views.PrintAllStretches(database)
 			} else if result == "E" {
-				views.PrintAllExers(database)
+				// views.PrintAllExers(database)
 			} else if result == "B" {
 				views.PrintAllStretches(database)
 				views.PrintAllExers(database)
